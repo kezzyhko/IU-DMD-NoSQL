@@ -29,7 +29,7 @@ folder queries {
 
 
 [restore.sql] -l-> postgresql_db  : "1.b (psql)"
-postgresql_db ---> csv_files : "1.c (export.cypher)"
+postgresql_db ---> csv_files : "1.c (export.sql)"
 csv_files -> neo4j_db : "2.b (import.cypher)"
 query_files --> neo4j_db : "2.c (cypher-shell)"
 
