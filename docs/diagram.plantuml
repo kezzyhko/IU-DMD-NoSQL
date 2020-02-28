@@ -1,0 +1,38 @@
+@startuml
+
+cloud Moodle {
+    [restore.sql]
+}
+
+database PostgreSQL {
+    [dvdrental] as postgresql_db
+    note left of postgresql_db : "1.a"
+}
+
+database Neo4j {
+    [dvdrental] as neo4j_db
+    note right of neo4j_db : "2.a"
+}
+
+folder CSV {
+    [category.csv]
+    [film.csv]
+    [other .csv files] as csv_files
+}
+
+folder queries {
+    [1.cypher]
+    [2.cypher]
+    [other .cypher files] as query_files
+}
+
+
+
+[restore.sql] -l-> postgresql_db  : "1.b (psql)"
+postgresql_db ---> csv_files : "1.c (export.cypher)"
+csv_files -> neo4j_db : "2.b (import.cypher)"
+query_files --> neo4j_db : "2.c (cypher-shell)"
+
+
+
+@enduml
