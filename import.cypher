@@ -5,7 +5,7 @@ CREATE (:category {category_id: toInteger(csv.category_id), name: csv.name, last
 CREATE CONSTRAINT category_pkey ON (c:category) ASSERT c.category_id IS UNIQUE;
 
 LOAD CSV WITH HEADERS FROM "file:///film.csv" AS csv
-CREATE (:film {film_id: toInteger(csv.film_id), title: csv.title, description: csv.description, release_year: toInteger(csv.release_year), rental_duration: toInteger(csv.rental_duration), rental_rate: toFloat(csv.rental_rate), length: toInteger(csv.length), replacement_cost: toFloat(csv.replacement_cost), rating: csv.rating, last_update: DATETIME(REPLACE(csv.last_update, " ", "T")), special_features: csv.special_features});
+CREATE (:film {film_id: toInteger(csv.film_id), title: csv.title, description: csv.description, release_year: toInteger(csv.release_year), rental_duration: toInteger(csv.rental_duration), rental_rate: toFloat(csv.rental_rate), length: toInteger(csv.length), replacement_cost: toFloat(csv.replacement_cost), rating: csv.rating, last_update: DATETIME(REPLACE(csv.last_update, " ", "T")), special_features: split(replace(replace(replace(csv.special_features, '{', ''), '\"', ''), '}', ''), ",")});
 CREATE CONSTRAINT film_pkey ON (f:film) ASSERT f.film_id IS UNIQUE;
 CREATE INDEX idx_title FOR (f:film) ON (f.title);
 CALL db.index.fulltext.createNodeIndex("fulltext_idx", ["film"], ["title", "description"]);
