@@ -3,8 +3,9 @@ An assignment on Data Modelling and Databases II Spring 2020 (2nd year) course i
 
 
 
-## The task
+## General information
 
+* Everything is tested only with `psql (PostgreSQL) 12.2`, `Neo4j Desktop 1.2.4`, `Neo4j Server 4.0.0 Enterprise` and `Cypher-Shell 4.0.1`
 * [Description of the task](https://hackmd.io/@T2MYP-UFRZG1_qAeeMwS1Q/BJJFc7tmI)
 * Files given for the task are `/docs/task.*`
 
